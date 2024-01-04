@@ -1,0 +1,224 @@
+/* montserrat-300 - cyrillic_latin */
+@font-face {
+    font-display: swap;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/montserrat-v26-cyrillic_latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* montserrat-regular - cyrillic_latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/montserrat-v26-cyrillic_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* montserrat-700 - cyrillic_latin */
+  @font-face {
+    font-display: swap;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/montserrat-v26-cyrillic_latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Montserrat';
+    color: #939393;
+    background-color: #141414;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+input {
+    height: 40px;
+}
+
+.container {
+    max-width: 1170px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.header{
+    height: 60px;
+    background-color: #222222;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    margin-right: auto;
+    font-style: italic;
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.header-nav-list {
+    display: flex;
+    align-items: center;
+}
+
+
+.header-nav-item:not(:last-child) {
+    margin-right: 50px;
+}
+
+.neader-nav-link {
+    display: flex;
+    align-items: center;
+
+}
+
+.neader-nav-link:hover {
+    transition-property: color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    color: #939393;
+}
+
+.header-icons {
+    display: inline-block;
+    margin-right: 2px;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+}
+
+.header-find-icon {
+    background: url(../img/search_FILL0_wght400_GRAD0_opsz24.svg) center center no-repeat transparent;
+}
+
+.header-add-icon {
+    background: url(../img/add_circle_FILL0_wght400_GRAD0_opsz24.svg) center center no-repeat transparent;
+}
+
+.header-user-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background: url(../img/account_circle_FILL0_wght400_GRAD0_opsz24.svg) center center no-repeat transparent;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form-persons {
+    width: 50px;
+}
+
+.container-hero-btn {
+    height: 40px;
+    padding: 5px 6px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.container-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-from {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.form-persons {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.section-hero-heading {
+    padding-top: 40px;
+    padding-bottom: 70px;
+    color: #939393;
+}
+
+.section-do {
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+
+.section-do-list {
+    display: flex;
+}
+
+.section-do-item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 25%;
+}
+
+.section-do-item:not(:last-child) {
+    margin-right: 30px;
+}
+
+.section-do-item-heading {
+    color: #656565;
+}
+
+.section-tg {
+    color: white;
+    background-color: #222222;
+}
+
+.section-tg-adv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-tg-text {
+    margin-right: 40px;
+}
+
+.btn-tg {
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #141414;
+    background-color: aquamarine;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(101, 206, 171);
+}
+
+.section-footer {
+    padding-top: 50px;
+}
+
+.text-footer {
+    font-size: 14px;
+}
