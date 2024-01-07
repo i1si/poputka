@@ -1,0 +1,10 @@
+version: ""
+
+services:
+  postgres:
+    image: postgres:16.1
+    container_name: pp_postgres
+    volumes:
+      - # TODO
+    env_file:
+      - .env

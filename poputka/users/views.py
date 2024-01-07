@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
-from users.forms import AuthForm, RegisterForm
+from .forms import AuthForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
+from django.core.mail import send_mail
 
 
 def login_view(request):
@@ -16,7 +17,7 @@ def login_view(request):
                     login(request, user)
                     return HttpResponse('вы вошли в систему')
                 else:
-                    auth_form.add_error('__all__','Данная учетная запись не активна')
+                    auth_form.add_error('__all__', 'Данная учетная запись не активна')
             else:
                 auth_form.add_error('__all__', 'Неправильный логин или пароль')
 
@@ -36,6 +37,7 @@ def register_view(request):
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email')
+            send_mail('Subject text', 'Message text', 'redmaythe1@yandex.ru', [email,])
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=raw_password)
             login(request, user)
