@@ -15,7 +15,7 @@ def login_view(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('вы вошли в систему')
+                    return redirect('/')
                 else:
                     auth_form.add_error('__all__', 'Данная учетная запись не активна')
             else:
@@ -28,7 +28,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponse('вы вышли из записи')
+    return redirect('/')
 
 
 def register_view(request):
@@ -37,7 +37,13 @@ def register_view(request):
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email')
-            send_mail('Subject text', 'Message text', 'redmaythe1@yandex.ru', [email,])
+            confirmation_url = ''
+            send_mail(
+                'Попутка - Подтвердите свою почту', 
+                f'Для подтверждения почты перейдите по ссылке:\n\n{confirmation_url}', 
+                None, 
+                [email,]
+            )
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=raw_password)
             login(request, user)

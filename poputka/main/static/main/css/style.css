@@ -140,7 +140,7 @@ input {
     border-radius: 5px;
 }
 
-.container-hero {
+.flex-column-center {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,10 +215,30 @@ input {
     background-color: rgb(101, 206, 171);
 }
 
-.section-footer {
+.section-pt-50px {
     padding-top: 50px;
 }
 
 .text-footer {
     font-size: 14px;
+}
+
+.padding-20px {
+    padding-top: 25px;
+}
+
+.error-message {
+    color: red;
+}
+
+.form-label {
+    display: block;
+    margin-top: 20px;
+}
+
+.border-radius-15 {
+    background-color: #222222;
+    width: 500px;
+    padding-bottom: 20px;
+    border-radius: 15px;
 }

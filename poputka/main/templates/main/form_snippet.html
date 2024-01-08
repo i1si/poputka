@@ -1,0 +1,17 @@
+<div class="error-message">
+	{{ form.non_field_errors }}
+</div>
+
+{% for field in form %}
+	{% if field.errors %}
+	{% for error in field.errors %}
+	<div class="error-message">
+		{{ error }}
+	</div>
+	{% endfor %}
+	{% endif %}
+	<div class="form-label">
+	{{ field.label_tag }}
+	</div>
+	{{ field }}
+{% endfor %}

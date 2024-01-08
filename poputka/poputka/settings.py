@@ -74,9 +74,9 @@ DATABASES = {
         # 'PORT': getenv('PG_PORT'),
         # 'USER': getenv('PG_USER'),
         # 'PASSWORD': getenv('PG_PWD')
-        'NAME': 'db',
+        'NAME': 'pp_db',
         'HOST': '127.0.0.1',
-        'PORT': 35543,
+        'PORT': 22456,
         'USER': 'djdjdj',
         'PASSWORD': 'u0jg1STS0A',
     }
@@ -107,7 +107,7 @@ AUTH_USER_MODEL = 'users.User'
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -126,6 +126,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# yandex smtp service settings
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False

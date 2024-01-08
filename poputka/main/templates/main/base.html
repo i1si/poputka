@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{% static 'main/css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+  <header class="header">
+  <div class="container header-container">
+    <a href="{% url 'main' %}" class="logo">
+      Попутка
+    </a>
+    {% block header %}{% endblock header %}
+  </div>
+  </header>
+  <main>
+  {% block content %}
+  {% endblock content %}
+    <section class="section-pt-50px">
+      <div class="container text-footer text-center">
+        <p>
+          © djdjdj, 2023
+        </p>
+        <p>
+          linkedin
+        </p>
+      </div>
+    </section>
+  </main> 
+</body>
+</html>

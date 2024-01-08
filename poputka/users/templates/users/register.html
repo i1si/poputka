@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
-</head>
-<body>
-    <h2>
-        Регистрация
-    </h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зарегестрироваться</button>
-        <p>
-        Уже есть аккаунт?
-        <a href="{% url 'login' %}">Войти</a>
-        </p>
-    </form>
-</body>
-</html>
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+Регистрация
+{% endblock title %}
+
+{% block content %}
+<section class="section-pt-50px">
+	<div class="container flex-column-center border-radius-15">
+		<h2>
+			Регистрация
+		</h2>
+		<form method="post" class="flex-column-center">
+			{% csrf_token %}
+			{{ form }}
+			<button type="submit" class="form-label">Зарегистрироваться</button>
+			<div class="padding-20px">
+				Уже есть аккаунт?
+				<a href="{% url 'login' %}">Войти</a>
+			</div>
+		</form>
+	</div>
+</section>
+{% endblock content %}
