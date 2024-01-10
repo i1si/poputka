@@ -1,14 +1,14 @@
-FROM python:3.10.7
+FROM python:3.10.7-alpine
 
-SHELL ["/bin/bash", "-c"]
-
-ENV PYTHONDONTWRITEBYTECODE 1  # dont create .pyc files
-ENV PYTHONUNBUFFERED 1
-
-RUN apt update && apt upgrade
-RUN pip install --upgrade pip
-RUN useradd -rms /bin/bash djdjdj
+COPY requirements.txt /temp/requirements.txt
+COPY poputka /poputka
 WORKDIR /poputka
-COPY --chown=djdjdj:djdjdj . .
-RUN pip install -r requirements.txt
-USER djdjdj
+EXPOSE 8000
+
+RUN apk add postgresql-client build-base postgresql-dev
+
+RUN pip install -r /temp/requirements.txt
+
+RUN adduser --disabled-password service-user
+
+USER service-user

@@ -15,6 +15,13 @@
       Попутка
     </a>
     {% block header %}{% endblock header %}
+    {% if request.user.is_authenticated %}
+    <a href="" class="header-nav-link header-nav-name">
+      {{ request.user.first_name }}
+    </a>
+    {% else %}
+      <a href="{% url 'login' %}" class="neader-nav-link header-user-icon"></a>
+    {% endif %}
   </div>
   </header>
   <main>

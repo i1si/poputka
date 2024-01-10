@@ -117,7 +117,12 @@ input {
     background: url(../img/add_circle_FILL0_wght400_GRAD0_opsz24.svg) center center no-repeat transparent;
 }
 
+.header-nav-name {
+    margin-left: 15px;
+}
+
 .header-user-icon {
+    margin-left: 15px;
     display: inline-block;
     width: 40px;
     height: 40px;

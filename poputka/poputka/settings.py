@@ -1,4 +1,4 @@
-from os import getenv
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -69,16 +69,16 @@ WSGI_APPLICATION = 'poputka.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': getenv('PG_NAME'),
-        # 'HOST': getenv('PG_HOST'),
+        'HOST': os.environ.get('DB_HOST'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD')
         # 'PORT': getenv('PG_PORT'),
-        # 'USER': getenv('PG_USER'),
-        # 'PASSWORD': getenv('PG_PWD')
-        'NAME': 'pp_db',
-        'HOST': '127.0.0.1',
-        'PORT': 22456,
-        'USER': 'djdjdj',
-        'PASSWORD': 'u0jg1STS0A',
+        # 'NAME': 'pp_db',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': 22456,
+        # 'USER': 'djdjdj',
+        # 'PASSWORD': 'u0jg1STS0A',
     }
 }
 

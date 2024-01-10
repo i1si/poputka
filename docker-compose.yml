@@ -1,10 +1,28 @@
-version: ""
-
 services:
-  postgres:
-    image: postgres:16.1
-    container_name: pp_postgres
+  pp-app:
+    build: 
+      context: .
+    ports:
+      - "8000:8000"
     volumes:
-      - # TODO
-    env_file:
-      - .env
+      - ./poputka:/poputka
+    environment:
+      - DB_HOST=pp_database
+      - DB_NAME=db
+      - DB_USER=djdjdj
+      - DB_PASSWORD=u0jg1STS0A
+
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - pp_database
+
+  pp_database:
+    image: postgres:16.1-alpine3.19
+    volumes:
+      - ~/.pg/pg_data/poputka_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=djdjdj
+      - POSTGRES_PASSWORD=u0jg1STS0A
+    

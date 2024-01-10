@@ -1,7 +1,6 @@
 from django.shortcuts import redirect, render
 from .forms import AuthForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
 from django.core.mail import send_mail
 
 
@@ -51,3 +50,7 @@ def register_view(request):
     else:
         form = RegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+def register_confirm(request, token):
+    ...

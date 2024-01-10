@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+Найти попутку | Попутка
+{% endblock title %}
+
+{% block header %}
+<a href="{% url 'offer' %}" class="neader-nav-link">
+	<span class="header-icons header-add-icon"></span>
+	Опубликовать поездку
+</a>
+{% endblock header %}
+
+{% block content %}
+<section>
+	<div class="container flex-column-center">
+		<h1 class="section-hero-heading text-center">
+			Куда вы хотите поехать?
+		</h1>
+		{% include 'main/searchform.html' %}
+	</div>
+</section>
+{% endblock content %}
