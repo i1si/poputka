@@ -134,3 +134,6 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'redmaythe1@yandex.ru'
 EMAIL_HOST_PASSWORD = 'loqexwbkisojzdtf'
 DEFAULT_FROM_EMAIL = 'redmaythe1@yandex.ru'
+
+# celery
+CELERY_BROKER_URL = 'redis://redis:6379/0'
