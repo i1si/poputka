@@ -9,7 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = getenv('PP_SECRET_KEY')
 SECRET_KEY = 'django-insecure-$z5u*sffkt*g6!d$+)=fb_(q)s1v@)1y*(1(o(qw5zw@e$gf4='
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -137,3 +136,14 @@ DEFAULT_FROM_EMAIL = 'redmaythe1@yandex.ru'
 
 # celery
 CELERY_BROKER_URL = 'redis://redis:6379/0'
+
+# redis
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',
+    }
+}
+
+DJ_USER_CONFIRMATION_KEY = 'user_confirmation_{token}'
+DJ_USER_CONFIRMATION_TIMEOUT = 300
