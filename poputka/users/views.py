@@ -20,12 +20,13 @@ def login_view(request):
             if user:
                 if user.is_active:
                     login(request, user)
-                    return redirect('/')
+                    return redirect('main')
                 else:
                     auth_form.add_error('__all__', 'Данная учетная запись не активна')
             else:
                 auth_form.add_error('__all__', 'Неправильный логин или пароль')
-
+    elif request.user.is_authenticated:
+        return redirect('main')
     else:
         auth_form = AuthForm()
     return render(request, 'users/login.html', context={'form': auth_form})
@@ -33,7 +34,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/')
+    return redirect('main')
 
 
 def register_view(request):
@@ -57,6 +58,8 @@ def register_view(request):
             user = authenticate(email=email, password=raw_password)
             login(request, user)
             return render(request, 'users/register_confirm.html', context={'email': email})
+    elif request.user.is_authenticated:
+        return redirect('main')
     else:
         form = RegisterForm()
     return render(request, 'users/register.html', context={'form': form})
@@ -70,6 +73,6 @@ def register_confirm(request, token):
         user.is_verified = True
         user.save()
         return render(request, 'users/register_confirmed.html')
-    return redirect('/')
+    return redirect('main')
 
 

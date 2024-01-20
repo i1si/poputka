@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def index(request):
@@ -10,4 +10,6 @@ def search(request):
 
 
 def offer(request):
-    return render(request, 'main/offer.html')
+    if request.user.is_authenticated:
+        return render(request, 'main/offer.html')
+    return redirect('login')
