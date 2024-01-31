@@ -13,5 +13,9 @@
 {% endblock header %}
 
 {% block content %}
-tut dolzhna bit` forma ili redirect na 'login'
+<form action="{% url 'offer' %}" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit" class="container-hero-btn">Добавить</button>
+</form>
 {% endblock content %}

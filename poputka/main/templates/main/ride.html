@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+Поездка {{ ride.from_place }} - {{ ride.to_place }} | Попутка
+{% endblock title %}
+
+{% block header %}
+{% include 'main/fullheader.html' %}
+{% endblock header %}
+
+{% block content %}
+<p>Попутка из {{ ride.from_place }} в {{ ride.to_place }}.</p>
+<p>Выезд {{ ride.ride_datetime }}</p>
+<p>Свободных мест: {{ ride.seats_count }}</p>
+<p>Цена за 1 место: {{ ride.price }} руб.</p>
+<p>Водитель {{ ride.driver.first_name }}, {{ ride.driver.ride_count }} поездок, рейтинг {{ ride.driver.rating }}</p>
+<p>Дата регистрации {{ ride.driver.date_joined }}</p>
+
+
+{% endblock content %}

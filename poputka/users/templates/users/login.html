@@ -16,11 +16,11 @@
 			{% csrf_token %}
 			{{ form }}
 			<button type="submit" class="form-label">Войти</button>
-			<div class="padding-20px">
-				Еще нет аккаунта?
-				<a href="{% url 'register' %}" class="text-center">Зарегистрироваться</a>
-			</div>
 		</form>
+		<div class="padding-20px">
+			Еще нет аккаунта?
+			<a href="{% url 'register' %}" class="text-center">Зарегистрироваться</a>
+		</div>
 	</div>
 </section>
 {% endblock content %}

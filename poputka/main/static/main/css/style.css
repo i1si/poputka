@@ -121,13 +121,58 @@ input {
     margin-left: 15px;
 }
 
-.header-user-icon {
+.header-user-box {
     margin-left: 15px;
+    position: relative;
     display: inline-block;
-    width: 40px;
-    height: 40px;
+}
+
+.header-user-box-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 200px;
+    top: 50px;
+    right: 0;
+    background-color: #222222;
+    z-index: 11;
+}
+
+.dropdown-show {
+    display: block;
+}
+
+.dropdown-content a {
+    margin: 17px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-content svg {
+    margin-left: 20px;
+}
+
+.header-user-icon {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
     background-size: contain;
     background: url(../img/account_circle_FILL0_wght400_GRAD0_opsz24.svg) center center no-repeat transparent;
+}
+
+.user-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    box-shadow: 0 0 0 1px white;
 }
 
 .text-center {

@@ -10,7 +10,9 @@ click-repl==0.3.0
 colorama==0.4.6
 Django==5.0
 kombu==5.3.4
+pillow==10.2.0
 prompt-toolkit==3.0.43
+psycopg2==2.9.9
 psycopg2-binary==2.9.9
 pytz==2023.3.post1
 redis==5.0.1

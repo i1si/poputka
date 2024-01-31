@@ -26,6 +26,8 @@ services:
       - POSTGRES_DB=db
       - POSTGRES_USER=djdjdj
       - POSTGRES_PASSWORD=u0jg1STS0A
+    ports:
+      - "5432:5432"
 
   redis:
     image: redis:7.2-alpine

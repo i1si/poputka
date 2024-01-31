@@ -41,10 +41,12 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     """
-    Custom user model for login via email with no username field
+    Custom user model for login via email without username field
     """
     
     username = None
+    last_name = None
+    first_name = models.CharField(_("first name"), max_length=30)
     email = models.EmailField(_('email address'), unique=True, blank=False, null=False)
     is_verified = models.BooleanField(
         _('is verified'), 
@@ -52,5 +54,10 @@ class User(AbstractUser):
         help_text=_('Designates whether the user has confirmed the email'))
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    birthday = models.DateField('Дата рождения', blank=True, null=True)
+    rating = models.FloatField('Рейтинг', blank=True, null=True)
+    avatar = models.ImageField('Изображение профиля', upload_to='avatars', default=None, blank=True, null=True)
+    ride_count = models.IntegerField('Всего поездок', default=0)
 
     objects = UserManager()

@@ -73,11 +73,6 @@ DATABASES = {
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD')
         # 'PORT': getenv('PG_PORT'),
-        # 'NAME': 'pp_db',
-        # 'HOST': '127.0.0.1',
-        # 'PORT': 22456,
-        # 'USER': 'djdjdj',
-        # 'PASSWORD': 'u0jg1STS0A',
     }
 }
 
@@ -119,6 +114,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Files uploaded by a user
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
