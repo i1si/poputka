@@ -196,6 +196,10 @@ input {
     align-items: center;
 }
 
+.form {
+	display: flex;
+}
+
 .form-from {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -291,4 +295,116 @@ input {
     width: 500px;
     padding-bottom: 20px;
     border-radius: 15px;
+}
+
+.autocomplete-list {
+	position: absolute;
+	margin-top: 2px;
+	min-width: 250px;
+	max-height: 150px;
+	overflow-y: scroll;
+	background-color: white;
+	border-radius: 10px;
+}
+
+.autocomplete-list li {
+	margin: 8px 6px;
+	padding: 3px 5px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.autocomplete-list li:hover {
+	background-color: #eaeaea;
+}
+
+.autocomplete-list::-webkit-scrollbar {
+	border-radius: 15px;
+}
+
+.autocomplete-list::-webkit-scrollbar-thumb {
+	background-color: #939393;
+	border-radius: 15px;
+	border: 5px solid white;
+}
+
+.section-rides {
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.ride-box {
+    width: 600px;
+    height: 200px;
+    margin-top: 20px;
+    padding: 15px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222222;
+    border-radius: 15px;
+}
+
+.ride-time {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.ride-info {
+    height: 100%;
+    width: 380px;
+    padding: 25px 20px 5px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    border-left: 2px dashed #939393;
+    border-right: 2px dashed #939393;
+}
+
+.ride-route {
+    font-size: 20px;
+}
+
+.ride-price {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.ride-user {
+    display: flex;
+    align-items: center;
+}
+
+.ride-user-icon {
+    margin-right: 5px;
+}
+
+.ride-bottom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ride-seats {
+    display: flex;
+    align-items: center;
+}
+
+.ride-user-rating {
+    display: flex;
+    align-items: center;
+}
+
+.ride-user-rating-text {
+    margin-top: 4px;
+    margin-left: 2px;
+    font-size: 14px;
+}
+
+#ride-user-avatar {
+    width: 45px;
+    height: 45px;
 }

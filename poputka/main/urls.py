@@ -1,14 +1,20 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
-from .views import index, search, offer, show_ride
+from django.urls import include, path
+from rest_framework import routers
+from .views import CityViewSet, index, search, offer, show_ride, RideViewSet
 
+
+router = routers.DefaultRouter()
+router.register(r'rides', RideViewSet, basename='ride')
+router.register(r'cities', CityViewSet, basename='city')
 
 urlpatterns = [
     path('', index, name='main'),
     path('search/', search, name='search'),
     path('offer/', offer, name='offer'),
     path('ride/<int:ride_id>/', show_ride, name='ride'),
+    path('api/v1/', include(router.urls))
 ]
 
 if settings.DEBUG:

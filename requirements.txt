@@ -9,6 +9,7 @@ click-plugins==1.1.1
 click-repl==0.3.0
 colorama==0.4.6
 Django==5.0
+djangorestframework==3.14.0
 kombu==5.3.4
 pillow==10.2.0
 prompt-toolkit==3.0.43

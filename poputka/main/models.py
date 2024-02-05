@@ -16,3 +16,17 @@ class Ride(models.Model):
 
     def __str__(self):
         return f'{self.from_place} - {self.to_place}'
+    
+
+class City(models.Model):
+    name = models.CharField('Название')
+    subject = models.CharField('Субъект')
+    latitude = models.CharField('Широта')
+    longtitude = models.CharField('Долгота')
+
+    class Meta:
+        verbose_name = 'Город'
+        verbose_name_plural = 'Города'
+
+    def __str__(self):
+        return f'{self.name}, {self.subject}'

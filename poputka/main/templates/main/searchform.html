@@ -1,8 +1,20 @@
-<form action="{% url 'search' %}" method="get" class="form">
-	{% csrf_token %}
-	<input required type="text" name="from_place" placeholder="Откуда" class="form-from" value="{{ form.from_place.value }}">
-	<input required type="text" name="to_place" placeholder="Куда" value="{{ form.to_place.value }}">
-	<input required type="date" name="ride_date" value="{{ form.ride_date.value }}">
-	<input required type="number" name="person_count" value="{{ form.person_count.value }}" title="Сколько человек поедет?" class="form-persons">
-	<button type="submit" class="container-hero-btn">Найти</button>
-</form>
+{% load static %}
+<div>
+	<form action="{% url 'search' %}" method="get" class="form">
+		{% csrf_token %}
+		<div>
+			<input required type="text" name="from_place" placeholder="Откуда" id="inp-from" class="form-from" value="{{ form.from_place.value }}" autocomplete="off">
+			<div id="autocomplete-from">
+			</div>
+		</div>
+		<div>
+			<input required type="text" name="to_place" placeholder="Куда" id="inp-to" value="{{ form.to_place.value }}" autocomplete="off">
+			<div id="autocomplete-to">
+			</div>
+		</div>
+		<input required type="date" name="ride_date" id="form_date" value="{{ form.ride_date.value }}">
+		<input required type="number" name="person_count" id="person_count" value="{{ form.person_count.value }}" title="Сколько человек поедет?" class="form-persons">
+		<button type="submit" class="container-hero-btn">Найти</button>
+	</form>
+	<script src="{% static 'main/scripts/autocomplete.js' %}"></script>
+</div>

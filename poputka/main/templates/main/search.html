@@ -18,18 +18,12 @@
 		<h1 class="section-hero-heading text-center">
 			Куда вы хотите поехать?
 		</h1>
-		<form action="{% url 'search' %}" method="get" class="form">
 			{% include 'main/searchform.html' %}
-		</form>
 	</div>
 </section>
-<section>
-	{% if rides %}
-		{% for ride in rides %}
-		<a href="{% url 'ride' ride.id %}">{{ ride.from_place }} - {{ ride.to_place }} {{ ride.ride_datetime }}</a>
-		{% endfor %}
-	{% else %}
-		Поездок нет получается что ли :\
-	{% endif %}
+<section class="section-rides">
+	<div id="rides-list" class="container flex-column-center">
+		<script src="{% static 'main/scripts/getRides.js' %}"></script>
+	</div>
 </section>
 {% endblock content %}
