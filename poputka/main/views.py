@@ -1,9 +1,9 @@
-import time
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import AddRide, SearchRide
 from .models import Ride, City
 from rest_framework import viewsets
 from .serializers import CitySerializer, RideSerializer
+from django.utils import timezone
 
 
 def index(request):
@@ -11,18 +11,8 @@ def index(request):
 
 
 def search(request):
-    form = SearchRide(request.GET)
-    if form.is_valid():
-        from_place = request.GET.get('from_place')
-        to_place = request.GET.get('to_place')
-        ride_date = request.GET.get('ride_date')
-        person_count = request.GET.get('person_count')
-        rides = Ride.objects.filter(from_place=from_place, to_place=to_place, ride_datetime__date=ride_date, 
-                                    seats_count__gte=person_count)
-    else:
-        form = SearchRide()
-        rides = None
-    return render(request, 'main/search.html', {'form': form, 'rides': rides})
+    form = SearchRide(request.GET) if SearchRide(request.GET).is_valid() else None
+    return render(request, 'main/search.html', {'form': form})
 
 
 def offer(request):
