@@ -3,7 +3,6 @@ from .forms import AddRide, SearchRide
 from .models import Ride, City
 from rest_framework import viewsets
 from .serializers import CitySerializer, RideSerializer
-from django.utils import timezone
 
 
 def index(request):
