@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+	{{ user.first_name }} | Профиль
+{% endblock title %}
+
+{% block header %}
+	{% include 'main/fullheader.html' %}
+{% endblock header %}
+
+{% block content %}
+<section class="section-pt-50px">
+	<div class="container profile-container">
+		<div class="left-sidebar">
+			<nav>
+				<ul>
+					<li><a href="{% url 'edit_profile' request.user.id %}">Редактировать профиль</a></li>
+					<li>Настройки</li>
+					<li><a href="{% url 'logout' %}">Выйти</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="flex-column-center">
+			<div class="profile-box">
+				{% if is_owner %}
+					{% include 'users/owner_profile.html' %}
+				{% else %}
+					{% include 'users/guest_profile.html' %}
+				{% endif %}	
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock content %}

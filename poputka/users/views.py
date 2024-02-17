@@ -1,13 +1,15 @@
 from uuid import uuid4
 from django.conf import settings
-from django.shortcuts import redirect, render
-from django.core.cache import cache
-from django.urls import reverse_lazy
-from users.models import User
-
-from users.tasks import send_email
-from .forms import AuthForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
+from django.core.cache import cache
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
+
+from .models import User
+from main.models import Feedback
+from .tasks import send_email
+from .forms import AuthForm, RegisterForm
 
 
 def login_view(request):
@@ -76,3 +78,14 @@ def register_confirm(request, token):
     return redirect('main')
 
 
+def profile(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    feedback_list = Feedback.objects.filter(rated_user=user)
+    is_owner = request.user.id == user.id
+    return render(request, 'users/profile.html', context={'user': user, 'feedback_list': feedback_list, 'is_owner': is_owner})
+
+
+def edit_profile(request, user_id): 
+    if request.user.id != user_id:
+        raise Http404('The link seems to be broken')
+    return render(request, 'users/edit_profile.html')

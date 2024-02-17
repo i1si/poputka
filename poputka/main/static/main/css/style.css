@@ -275,6 +275,20 @@ input {
 
 .text-footer {
     font-size: 14px;
+    align-items: center;
+}
+
+.footer {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-copyright {
+    margin-left: 100px;
+    margin-right: 20px;
+    line-height: 32px;
 }
 
 .padding-20px {
@@ -408,3 +422,29 @@ input {
     width: 45px;
     height: 45px;
 }
+
+.profile-box {
+    padding: 20px;
+    background-color: #222222;
+    border-radius: 15px;
+    width: 550px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+}
+
+.profile-box-top {
+    display: flex;
+}
+
+.profile-container {
+    display: flex;
+}
+
+.left-sidebar {
+    width: 160px;
+}
+

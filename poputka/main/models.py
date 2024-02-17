@@ -30,3 +30,26 @@ class City(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.subject}'
+
+
+class Feedback(models.Model):
+    RATING_CHOICES = [
+        (1, 'Не понравилось'),
+        (2, 'Ожидания не оправдались'),
+        (3, 'Нормально'),
+        (4, 'Хорошо'),
+        (5, 'Отлично'),
+    ]
+    author = models.ForeignKey(to=User, on_delete=models.SET('Удален'), verbose_name='Автор', related_name='author')
+    rated_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    text = models.CharField('Текст', max_length=300)
+    rating = models.IntegerField('Оценка', choices=RATING_CHOICES)    # TODO выбор из нескольких оценок
+    date = models.DateField('Дата')
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+    
+    def __str__(self):
+        return f'{self.rated_user} | {self.rating}'
+    

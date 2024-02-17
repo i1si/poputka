@@ -1,8 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.db.models import F, Func
+from django.db.models.functions import ExtractYear
+from rest_framework import viewsets
+from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.viewsets import GenericViewSet
+
 from .forms import AddRide, SearchRide
 from .models import Ride, City
-from rest_framework import viewsets
-from .serializers import CitySerializer, RideSerializer
+from users.models import User
+from .serializers import CitySerializer, RideSerializer, UserSerializer
+
 
 
 def index(request):
@@ -62,3 +69,11 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
         if user_query:
             queryset = City.objects.filter(name__icontains=user_query)
             return(queryset)
+
+
+class UserInfoView(RetrieveModelMixin, GenericViewSet):
+    queryset = User.objects.annotate(
+        age=ExtractYear(Func(F('birthday'), function='age'))
+    )
+    serializer_class = UserSerializer
+    lookup_field = 'id'

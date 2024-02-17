@@ -23,10 +23,10 @@
         {% if request.user.avatar %}
           <img src="{{ request.user.avatar.url }}" class="user-icon" alt="user icon">
         {% else %}
-          <a href="{% url 'login' %}" class="neader-nav-link header-user-icon"></a>
+          <span class="neader-nav-link header-user-icon"></span>
         {% endif %}
         <div id="dropdown" class="dropdown-content">
-          <a href="{% url 'login' %}">
+          <a href="{% url 'profile' request.user.id %}">
             Профиль
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           </a>
@@ -57,13 +57,22 @@
   {% block content %}
   {% endblock content %}
     <section class="section-pt-50px">
-      <div class="container text-footer text-center">
-        <p>
-          © djdjdj, 2023
-        </p>
-        <p>
-          linkedin
-        </p>
+      <div class="container text-footer">
+        <div class="footer">
+          <div class="footer-copyright">
+            © djezhei, 2023
+          </div>
+          <div>
+            <div>
+              github:
+              <a href="https://github.com/djezhei">djezhei</a>
+            </div>
+            <div>
+              tg:
+              <a href="https://t.me/itsvanos">itsvanos</a>
+            </div>      
+          </div>
+        </div>
       </div>
     </section>
   </main> 
