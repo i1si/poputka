@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 
 class UserManager(BaseUserManager):
@@ -61,3 +62,6 @@ class User(AbstractUser):
     ride_count = models.IntegerField('Всего поездок', default=0)
 
     objects = UserManager()
+
+    def get_url_path(self):
+        return reverse('profile', kwargs={'user_id': self.id})

@@ -35,9 +35,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    uri = serializers.URLField(read_only=True, source='get_url_path')
+
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'avatar')
+        fields = ('id', 'uri', 'first_name', 'avatar')
 
 
 class FeedbackSerializer(serializers.ModelSerializer):

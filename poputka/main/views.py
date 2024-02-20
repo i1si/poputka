@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import F, Func
 from django.db.models.functions import ExtractYear
+from django.urls import reverse
 from rest_framework import viewsets
 from rest_framework.mixins import RetrieveModelMixin, ListModelMixin
 from rest_framework.viewsets import GenericViewSet
@@ -87,7 +88,7 @@ class FeedbackViewSet(ListModelMixin, GenericViewSet):
         if uid:
             queryset = Feedback.objects.filter(rated_user=uid)
             return queryset
-    
+        
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         response = super().list(request, args, kwargs)

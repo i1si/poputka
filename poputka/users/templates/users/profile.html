@@ -25,11 +25,7 @@
 		{% endif %}
 		<div class="flex-column-center profile-center">
 			<div class="profile-box hidden" id="profile-box">
-				{% if is_owner %}
-					{% include 'users/owner_profile.html' %}
-				{% else %}
-					{% include 'users/guest_profile.html' %}
-				{% endif %}	
+				{% include 'users/profile_info.html' %}
 			</div>
 		</div>
 	</div>
