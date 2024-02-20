@@ -52,6 +52,10 @@ input {
     height: 40px;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
     max-width: 1170px;
     margin-right: auto;
@@ -438,6 +442,7 @@ input {
 
 .profile-box-top {
     display: flex;
+    padding-bottom: 20px;
 }
 
 .profile-container {
@@ -448,3 +453,95 @@ input {
     width: 160px;
 }
 
+.profile-fname {
+    font-size: 28px;
+    color: white;
+}
+
+.profile-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-center {
+    margin: auto;
+}
+
+.profile-box-feedback {
+    margin-top: 30px;
+}
+
+.feedback-title {
+    color: white;
+    font-size: 22px;
+}
+
+.feedback-score {
+    font-size: 46px;
+}
+
+.feedback-count {
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.feedback-scoreitem {
+    padding: 6px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feedback-scoreitem-score {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.feedback-item {
+    margin-top: 20px;
+    border-top: 1px solid #939393;
+}
+
+.feedback-user-image {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    box-shadow: 0 0 0 1px white;
+}
+
+.feedback-item-top {
+    padding: 5px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback-item-mid {
+    margin-top: 5px;
+}
+
+.feedback-item-text {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.text-white {
+    color: white;
+}
+
+.feedback-item-date {
+    font-size: 14px;
+}
+
+.a-opac{
+    opacity: 0;
+    animation: ani 1s forwards;
+
+}
+
+@keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

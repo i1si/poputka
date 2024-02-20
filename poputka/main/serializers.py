@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import City, Ride
+from .models import City, Ride, Feedback
 from users.models import User
 
 
@@ -25,11 +25,26 @@ class CitySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    last_login = serializers.DateTimeField(format='%d.%m.%Y')
     date_joined = serializers.DateTimeField(format='%d.%m.%Y')
     age = serializers.IntegerField()
 
     class Meta:
         model = User
         depth = 1
-        fields = ('first_name', 'last_login', 'date_joined', 'age', 'avatar', 'rating', 'ride_count')
+        fields = ('first_name', 'date_joined', 'age', 'avatar', 'rating', 'ride_count')
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'avatar')
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    author = AuthorSerializer()
+    rating = serializers.CharField(source='get_rating_display')
+    date = serializers.DateField(format='%d.%m.%Y')
+
+    class Meta:
+        model = Feedback
+        fields = ('author', 'rating', 'date', 'text',)

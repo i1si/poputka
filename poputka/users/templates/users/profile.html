@@ -12,6 +12,7 @@
 {% block content %}
 <section class="section-pt-50px">
 	<div class="container profile-container">
+		{% if is_owner %}
 		<div class="left-sidebar">
 			<nav>
 				<ul>
@@ -21,8 +22,9 @@
 				</ul>
 			</nav>
 		</div>
-		<div class="flex-column-center">
-			<div class="profile-box">
+		{% endif %}
+		<div class="flex-column-center profile-center">
+			<div class="profile-box hidden" id="profile-box">
 				{% if is_owner %}
 					{% include 'users/owner_profile.html' %}
 				{% else %}

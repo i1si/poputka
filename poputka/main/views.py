@@ -2,13 +2,13 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import F, Func
 from django.db.models.functions import ExtractYear
 from rest_framework import viewsets
-from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.mixins import RetrieveModelMixin, ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
 from .forms import AddRide, SearchRide
-from .models import Ride, City
+from .models import Ride, City, Feedback
 from users.models import User
-from .serializers import CitySerializer, RideSerializer, UserSerializer
+from .serializers import CitySerializer, RideSerializer, UserSerializer, FeedbackSerializer
 
 
 
@@ -68,7 +68,7 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
         user_query = self.request.query_params.get('q', None)
         if user_query:
             queryset = City.objects.filter(name__icontains=user_query)
-            return(queryset)
+            return queryset
 
 
 class UserInfoView(RetrieveModelMixin, GenericViewSet):
@@ -77,3 +77,32 @@ class UserInfoView(RetrieveModelMixin, GenericViewSet):
     )
     serializer_class = UserSerializer
     lookup_field = 'id'
+
+
+class FeedbackViewSet(ListModelMixin, GenericViewSet):
+    serializer_class = FeedbackSerializer
+
+    def get_queryset(self):
+        uid = self.request.query_params.get('uid', None)
+        if uid:
+            queryset = Feedback.objects.filter(rated_user=uid)
+            return queryset
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        response = super().list(request, args, kwargs)
+        rating_counts = {
+            '1': queryset.filter(rating=1).count(),
+            '2': queryset.filter(rating=2).count(),
+            '3': queryset.filter(rating=3).count(),
+            '4': queryset.filter(rating=4).count(),
+            '5': queryset.filter(rating=5).count(),
+            'total': queryset.count()
+        }
+        new_data = {
+            'rating_counts': rating_counts,
+            'feedbacks': response.data,
+        }
+        response.data = new_data
+        return response
+

@@ -2,13 +2,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework import routers
-from .views import CityViewSet, index, search, offer, show_ride, RideViewSet, UserInfoView
+from .views import CityViewSet, index, search, offer, show_ride, RideViewSet, UserInfoView, FeedbackViewSet
 
 
 router = routers.DefaultRouter()
 router.register(r'rides', RideViewSet, basename='ride')
 router.register(r'cities', CityViewSet, basename='city')
 router.register(r'users', UserInfoView, basename='user')
+router.register(r'feedbacks', FeedbackViewSet, basename='feedback')
 
 urlpatterns = [
     path('', index, name='main'),

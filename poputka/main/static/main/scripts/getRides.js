@@ -6,7 +6,6 @@ const ridePersons = document.getElementById('person_count').value;
 const ridesList = document.getElementById('rides-list');
 
 if (rideFrom && rideTo && rideDate && ridePersons) {
-    console.log(rideFrom)
     fetch('http://127.0.0.1:8000/api/v1/rides/?from=' + rideFrom + '&to=' + rideTo + '&date=' + rideDate + '&persons=' + ridePersons)
     .then(res => {
         if (res.ok) {
