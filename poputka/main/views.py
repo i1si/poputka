@@ -3,14 +3,14 @@ from django.db.models import F, Func
 from django.db.models.functions import ExtractYear
 from django.urls import reverse
 from rest_framework import viewsets
-from rest_framework.mixins import RetrieveModelMixin, ListModelMixin
+from rest_framework.mixins import RetrieveModelMixin,UpdateModelMixin, ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 
 from .forms import AddRide, SearchRide
 from .models import Ride, City, Feedback
 from users.models import User
 from .serializers import CitySerializer, RideSerializer, UserSerializer, FeedbackSerializer
-
+from .permissions import IsOwnerOrReadOnly
 
 
 def index(request):
@@ -72,12 +72,13 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
             return queryset
 
 
-class UserInfoView(RetrieveModelMixin, GenericViewSet):
+class UserInfoView(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     queryset = User.objects.annotate(
         age=ExtractYear(Func(F('birthday'), function='age'))
     )
     serializer_class = UserSerializer
     lookup_field = 'id'
+    permission_classes = (IsOwnerOrReadOnly, )
 
 
 class FeedbackViewSet(ListModelMixin, GenericViewSet):
@@ -106,4 +107,4 @@ class FeedbackViewSet(ListModelMixin, GenericViewSet):
         }
         response.data = new_data
         return response
-
+    

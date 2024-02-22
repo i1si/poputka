@@ -1,0 +1,10 @@
+<div class="left-sidebar">
+    <nav>
+        <ul>
+            <li><a href="{% url 'profile' request.user.id %}">Профиль</a></li>
+            <li><a href="{% url 'edit_profile' request.user.id %}">Редактировать профиль</a></li>
+            <li>Настройки</li>
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+        </ul>
+    </nav>
+</div>

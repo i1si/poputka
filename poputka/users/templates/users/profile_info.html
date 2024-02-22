@@ -1,6 +1,6 @@
 {% load static %}
 <div class="profile-box-top">
-  <img src="{% static 'main/img/nophoto.png' %}" alt="user image" id="profile-photo" class="profile-image">
+	<img alt="user image" id="profile-photo" class="profile-image">
 	<div class="profile-flex">
 		<div>
 			<div class="profile-fname" id="profile-name">
@@ -64,4 +64,4 @@
 	<div id="feedback-holder">
 	</div>
 </div>
-<script src="{% static 'users/scripts/userinfo.js' %}" uid="{{ user.id }}" npURL="{% static 'main/img/nophoto.png' %}"></script>
+<script src="{% static 'users/scripts/userinfo.js' %}" uid="{{ user.id }}"></script>

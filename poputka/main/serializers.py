@@ -4,6 +4,7 @@ from users.models import User
 
 
 class DriverSerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = User
         fields = ['first_name', 'avatar',  'rating']
@@ -31,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         depth = 1
-        fields = ('first_name', 'date_joined', 'age', 'avatar', 'rating', 'ride_count')
+        fields = ('first_name', 'date_joined', 'birthday', 'age', 'avatar', 'rating', 'ride_count')
 
 
 class AuthorSerializer(serializers.ModelSerializer):

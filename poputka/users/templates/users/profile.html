@@ -13,15 +13,7 @@
 <section class="section-pt-50px">
 	<div class="container profile-container">
 		{% if is_owner %}
-		<div class="left-sidebar">
-			<nav>
-				<ul>
-					<li><a href="{% url 'edit_profile' request.user.id %}">Редактировать профиль</a></li>
-					<li>Настройки</li>
-					<li><a href="{% url 'logout' %}">Выйти</a></li>
-				</ul>
-			</nav>
-		</div>
+			{% include 'users/left_sidebar.html' %}
 		{% endif %}
 		<div class="flex-column-center profile-center">
 			<div class="profile-box hidden" id="profile-box">

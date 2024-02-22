@@ -58,7 +58,7 @@ class User(AbstractUser):
 
     birthday = models.DateField('Дата рождения', blank=True, null=True)
     rating = models.FloatField('Рейтинг', blank=True, null=True)
-    avatar = models.ImageField('Изображение профиля', upload_to='avatars', default=None, blank=True, null=True)
+    avatar = models.ImageField('Изображение профиля', upload_to='avatars', default='avatars/nophoto.png')
     ride_count = models.IntegerField('Всего поездок', default=0)
 
     objects = UserManager()

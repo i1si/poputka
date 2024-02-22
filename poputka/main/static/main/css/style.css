@@ -448,7 +448,6 @@ input {
 .profile-image {
     width: 150px;
     height: 150px;
-    margin-right: 10px;
 }
 
 .profile-box-top {
@@ -470,6 +469,7 @@ input {
 }
 
 .profile-flex {
+    margin-left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -557,10 +557,33 @@ input {
 .a-opac{
     opacity: 0;
     animation: ani 1s forwards;
-
 }
 
 @keyframes ani {
     0% {opacity: 0;}
     100% {opacity: 1;}
+}
+
+.file-label {
+    padding: 5px 15px;
+    background-color: #939393;
+    color: white;
+    font-family: sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.file-label:hover {
+    transition-property: background-color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    background-color: #656565;
+}
+
+.mar-top-5px {
+    margin-top: 7px;
+}
+
+.min-hei-70vh {
+    min-height: 70vh;
 }

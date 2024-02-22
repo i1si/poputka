@@ -9,15 +9,12 @@ function getAgeTitle(count) {
 
 const urlParams = new URLSearchParams(window.location.search);
 var uid = document.currentScript.getAttribute('uid');
-var npURL = document.currentScript.getAttribute('npURL');
 var baseURL = document.location.origin
 
 fetch('http://127.0.0.1:8000/api/v1/users/' + uid)
     .then(response => response.json())
     .then(data => {
-        if (data["avatar"]) {
-            document.getElementById('profile-photo').src=data["avatar"];
-        } 
+        document.getElementById('profile-photo').src=data["avatar"];
         document.getElementById('profile-name').innerHTML=data["first_name"];
         if (data["age"]) {
             document.getElementById('profile-age').innerHTML=getAgeTitle(data["age"]);
@@ -40,11 +37,7 @@ fetch('http://127.0.0.1:8000/api/v1/feedbacks/?uid=' + uid)
         document.getElementById('feedback-rating-2').innerHTML=data['rating_counts']['2'];
         document.getElementById('feedback-rating-1').innerHTML=data['rating_counts']['1'];
         const feedbacks = data['feedbacks'].map((list) => {
-            if (list["author"]["avatar"]) {
-                avatar = list["author"]["avatar"];
-            } else {
-    			avatar = npURL;
-            }
+            avatar = list["author"]["avatar"];
             return '<div class="feedback-item"><a href="' + baseURL + list['author']['uri'] + '" class="feedback-item-top"><div class="text-white">' + list["author"]["first_name"] + '</div><div class="ride-user"><img src="' + avatar + '" alt="user-image" class="feedback-user-image"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg></div></a><div class="feedback-item-mid"><div class="text-white">' + list["rating"] + '</div><div class="feedback-item-text">'+ list["text"] + '</div><div class="feedback-item-date">' + list["date"] + '</div></div></div>';
         })
         document.getElementById('feedback-holder').innerHTML=feedbacks.join('');
