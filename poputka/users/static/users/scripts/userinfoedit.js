@@ -30,6 +30,11 @@ function saveUserInfo() {
         headers: {'X-CSRFToken': csrfToken},
         mode: "same-origin"
     })
+    .then(response => {
+        if (response.status) {
+            document.getElementById('status-text').innerHTML='Информация обновлена'
+        }
+    })
 }
 
 function getAgeTitle(count) {
