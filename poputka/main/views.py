@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import F, Func
 from django.db.models.functions import ExtractYear
-from django.urls import reverse
 from rest_framework import viewsets
-from rest_framework.mixins import RetrieveModelMixin,UpdateModelMixin, ListModelMixin
+from rest_framework.mixins import RetrieveModelMixin,UpdateModelMixin, ListModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .forms import AddRide, SearchRide
 from .models import Ride, City, Feedback
@@ -42,11 +42,12 @@ def show_ride(request, ride_id):
 
 
 # API
-class RideViewSet(viewsets.ModelViewSet):
+class RideViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
     """
     API endpoint that allows ...
     """
-    serializer_class = RideSerializer    
+    serializer_class = RideSerializer
+    permission_classes = (IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly)
 
     def get_queryset(self):
         """
@@ -60,6 +61,9 @@ class RideViewSet(viewsets.ModelViewSet):
             queryset = Ride.objects.filter(from_place=from_place, to_place=to_place, ride_datetime__date=ride_date, 
                                         seats_count__gte=person_count)
             return queryset
+        
+    def perform_create(self, serializer):
+        serializer.save(driver=self.request.user)
 
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):

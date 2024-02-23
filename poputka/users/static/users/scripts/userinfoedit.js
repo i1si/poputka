@@ -1,10 +1,12 @@
+var baseURL = document.location.origin
+
 document.getElementById('avatar-input').addEventListener('change', event => {
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('avatar', file);
 
-    fetch('http://127.0.0.1:8000/api/v1/users/' + uid + '/', {
+    fetch(baseURL + '/api/v1/users/' + uid + '/', {
         method: "PATCH",
         body: formData,
         headers: {'X-CSRFToken': csrfToken},
@@ -24,7 +26,7 @@ function saveUserInfo() {
     formData.append('first_name', userName);
     formData.append('birthday', userBirthday);
 
-    fetch('http://127.0.0.1:8000/api/v1/users/' + uid + '/', {
+    fetch(baseURL + '/api/v1/users/' + uid + '/', {
         method: "PATCH",
         body: formData,
         headers: {'X-CSRFToken': csrfToken},
@@ -47,7 +49,7 @@ function getAgeTitle(count) {
 }
 
 let uid = document.currentScript.getAttribute('uid');
-fetch('http://127.0.0.1:8000/api/v1/users/' + uid)
+fetch(baseURL + '/api/v1/users/' + uid)
     .then(response => response.json())
     .then(data => {
         document.getElementById('profile-photo').src=data["avatar"];

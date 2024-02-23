@@ -12,8 +12,8 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
 
 class RideSerializer(serializers.HyperlinkedModelSerializer):
     ride_time = serializers.DateTimeField(source="ride_datetime", format="%H:%M")
-    driver = DriverSerializer()
-    
+    driver = DriverSerializer(read_only=True)
+
     class Meta:
         model = Ride
         fields = ['id', 'from_place', 'to_place', 'ride_time', 'seats_count', 'driver', 'price']

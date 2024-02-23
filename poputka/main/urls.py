@@ -15,7 +15,7 @@ urlpatterns = [
     path('', index, name='main'),
     path('search/', search, name='search'),
     path('offer/', offer, name='offer'),
-    path('ride/<int:ride_id>/', show_ride, name='ride'),
+    path('rides/<int:ride_id>/', show_ride, name='ride'),
     path('api/v1/', include(router.urls)),
 ]
 

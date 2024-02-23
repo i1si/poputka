@@ -11,7 +11,7 @@ const urlParams = new URLSearchParams(window.location.search);
 var uid = document.currentScript.getAttribute('uid');
 var baseURL = document.location.origin
 
-fetch('http://127.0.0.1:8000/api/v1/users/' + uid)
+fetch(baseURL + '/api/v1/users/' + uid)
     .then(response => response.json())
     .then(data => {
         document.getElementById('profile-photo').src=data["avatar"];
@@ -27,7 +27,7 @@ fetch('http://127.0.0.1:8000/api/v1/users/' + uid)
         document.getElementById('profile-box').classList.remove("hidden");
     })
 
-fetch('http://127.0.0.1:8000/api/v1/feedbacks/?uid=' + uid)
+fetch(baseURL + '/api/v1/feedbacks/?uid=' + uid)
     .then(response => response.json())
     .then(data => {
         document.getElementById('feedback-count').innerHTML='Отзывов: ' + data['rating_counts']['total'];

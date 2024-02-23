@@ -1,12 +1,11 @@
-let availableKeywords = ["test1", "test2", "test3", "test2", "test2", "test2", "test2"];
-
+var baseURL = document.location.origin
 const autocompleteFrom = document.getElementById("autocomplete-from");
 const inputFrom = document.getElementById("inp-from");
 const autocompleteTo = document.getElementById("autocomplete-to");
 const inputTo = document.getElementById("inp-to");
 
 async function getCities(q) {
-    let result = await fetch('http://127.0.0.1:8000/api/v1/cities/?q=' + q)
+    let result = await fetch(baseURL + '/api/v1/cities/?q=' + q)
     return result.json();
 }
 
