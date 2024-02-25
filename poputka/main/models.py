@@ -8,6 +8,7 @@ class Ride(models.Model):
     ride_datetime = models.DateTimeField('Дата')
     seats_count = models.PositiveIntegerField('Свободные места', null=True)
     price = models.PositiveIntegerField('Цена за место', null=True)
+    text = models.CharField('Описание', null=True)
     driver = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Водитель')
 
     class Meta:

@@ -11,28 +11,30 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class RideSerializer(serializers.HyperlinkedModelSerializer):
-    ride_time = serializers.DateTimeField(source="ride_datetime", format="%H:%M")
+    # ride_date = serializers.DateTimeField(source='ride_datetime', format='%Y-%m-%d')
+    ride_datetime = serializers.DateTimeField(format="%Y-%m-%dT%H:%M:%S")
     driver = DriverSerializer(read_only=True)
 
     class Meta:
         model = Ride
-        fields = ['id', 'from_place', 'to_place', 'ride_time', 'seats_count', 'driver', 'price']
+        fields = ('driver', 'id', 'from_place', 'to_place', 'text', 'ride_datetime', 'seats_count', 'price')
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):
+
     class Meta:
         model = City
         fields = "__all__"
 
 
 class UserSerializer(serializers.ModelSerializer):
-    date_joined = serializers.DateTimeField(format='%d.%m.%Y')
+    date_joined = serializers.DateTimeField(format='%d.%m.%Y', read_only=True)
     age = serializers.IntegerField()
 
     class Meta:
         model = User
-        depth = 1
-        fields = ('first_name', 'date_joined', 'birthday', 'age', 'avatar', 'rating', 'ride_count')
+        fields = ('first_name', 'date_joined', 'birthday', 'age', 'avatar', 'rating', 'ride_count', )
+        read_only_fields = ('rating', 'ride_count', 'age', )
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -50,4 +52,4 @@ class FeedbackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Feedback
-        fields = ('author', 'rating', 'date', 'text',)
+        fields = ('author', 'rating', 'date', 'text', )

@@ -4,7 +4,8 @@ from django.db.models.functions import ExtractYear
 from rest_framework import viewsets
 from rest_framework.mixins import RetrieveModelMixin,UpdateModelMixin, ListModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.response import Response
 
 from .forms import AddRide, SearchRide
 from .models import Ride, City, Feedback
@@ -42,14 +43,15 @@ def show_ride(request, ride_id):
 
 
 # API
-class RideViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
+class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericViewSet):
     """
     API endpoint that allows ...
     """
     serializer_class = RideSerializer
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly)
+    queryset = Ride.objects.all()
 
-    def get_queryset(self):
+    def list(self, request, *args, **kwargs):
         """
         Restricts the returned rides, by filtering against a `from`, `to`,  `date`, `persons` query parameters in the URL.
         """
@@ -59,15 +61,19 @@ class RideViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
         person_count = self.request.query_params.get('persons', None)
         if from_place and to_place and ride_date and person_count:
             queryset = Ride.objects.filter(from_place=from_place, to_place=to_place, ride_datetime__date=ride_date, 
-                                        seats_count__gte=person_count)
-            return queryset
-        
+                                        seats_count__gte=person_count).order_by('ride_datetime')
+        else:
+            queryset = None
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
     def perform_create(self, serializer):
         serializer.save(driver=self.request.user)
 
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CitySerializer
+    permission_classes = (IsAdminUser, )
 
     def get_queryset(self):
         user_query = self.request.query_params.get('q', None)
@@ -87,6 +93,7 @@ class UserInfoView(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
 
 class FeedbackViewSet(ListModelMixin, GenericViewSet):
     serializer_class = FeedbackSerializer
+    # permission_classes = (IsOwnerOrReadOnly, )  # TODO если буду добавлять миксины
 
     def get_queryset(self):
         uid = self.request.query_params.get('uid', None)

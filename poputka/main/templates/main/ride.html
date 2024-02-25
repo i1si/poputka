@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Поездка {{ ride.from_place }} - {{ ride.to_place }} | Попутка
+{{ ride.from_place }} - {{ ride.to_place }} | Попутка
 {% endblock title %}
 
 {% block header %}
@@ -10,11 +10,74 @@
 {% endblock header %}
 
 {% block content %}
-<p>Попутка из {{ ride.from_place }} в {{ ride.to_place }}.</p>
-<p>Выезд {{ ride.ride_datetime }}</p>
-<p>Свободных мест: {{ ride.seats_count }}</p>
-<p>Цена за 1 место: {{ ride.price }} руб.</p>
-<p>Водитель {{ ride.driver.first_name }}, {{ ride.driver.ride_count }} поездок, рейтинг {{ ride.driver.rating }}</p>
-<p>Дата регистрации {{ ride.driver.date_joined }}</p>
-
+<section class="section-ride">
+  <div class="container">
+    <div class="ride-wrapper mar-auto">
+      <div>
+        <div id="ride-date" class="text-center">
+          <div class="mar-auto skeleton skeleton-text-100-36"></div>
+        </div>
+      </div>
+      <div class="ride-dists flex-column-left">
+        <div class="ride-dist flex-center">
+          <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="24" fill="white"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Zm0-160q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Z"/></svg>
+          <div id="ride-dists-from">
+            <div class="skeleton skeleton-text-250px-23"></div>
+          </div>
+        </div>
+          <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="24" fill="white"><path d="M480-80 200-360l56-56 184 183v-647h80v647l184-184 56 57L480-80Z"/></svg>
+        <div class="ride-dist flex-center">
+          <svg xmlns="http://www.w3.org/2000/svg" height="10" viewBox="0 -960 960 960" width="24" fill="white"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Zm0-160q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Z"/></svg>
+          <div id="ride-dists-to">
+            <div class="skeleton skeleton-text-250px-23"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ride-cost">
+        <div>
+          Итого за 1 пассажира
+        </div>
+        <div class="ride-total" id="ride-total">
+          <div class="skeleton skeleton-text-80px-27"></div>
+        </div>
+      </div>
+      <div>
+        <a href="{% url 'profile' ride.driver.id %}" class="feedback-item-top">
+          <div class="text-white flex-column-sb">
+            <div id="ride-driver-name">
+              <div class="skeleton skeleton-text-20-18"></div>
+            </div>
+            <div class="flex-center">
+              <svg xmlns="http://www.w3.org/2000/svg" height="14" viewBox="0 -960 960 960" width="14" fill="white"><path d="m233-80 65-281L80-550l288-25 112-265 112 265 288 25-218 189 65 281-247-149L233-80Z"/></svg>
+              <div id="ride-drier-rating">
+                <div class="skeleton skeleton-text-20-18"></div>
+              </div>
+            </div>
+          </div>
+          <div class="ride-user">
+            <img class="feedback-user-image skeleton" id="ride-driver-image">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path fill="white" d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"></path></svg>
+          </div>
+        </a>
+      </div>
+      <div id="ride-text">
+        <div class="skeleton skeleton-text-100-16"></div>
+      </div>
+      <a href="" class="flex-center ride-contact">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#87c5de"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
+        <div id="ride-contact-text" class="flex-center">
+          <span class="mar-r-5px">Связаться с</span>
+          <div class="skeleton skeleton-text-20-18"></div>
+        </div>
+      </a>
+      <a href="" class="ride-book-btn btn-bc-blue">
+        <div class="flex-center jc-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="m691-150 139-138-42-42-97 95-39-39-42 43 81 81ZM240-600h480v-80H240v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40ZM120-80v-680q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v267q-19-9-39-15t-41-9v-243H200v562h243q5 31 15.5 59T486-86l-6 6-60-60-60 60-60-60-60 60-60-60-60 60Zm120-200h203q3-21 9-41t15-39H240v80Zm0-160h284q38-37 88.5-58.5T720-520H240v80Zm-40 242v-562 562Z"/></svg>
+          Забронировать
+        </div>
+      </a>
+    </div>
+  </div>
+  <script src="{% static 'main/scripts/ride.js' %}" rid="{{ ride.id }}"></script>
+</section>
 {% endblock content %}
