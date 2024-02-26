@@ -63,6 +63,7 @@
       <div id="ride-text">
         <div class="skeleton skeleton-text-100-16"></div>
       </div>
+      {% if request.user.id != ride.driver.id %}
       <a href="" class="flex-center ride-contact">
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#87c5de"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
         <div id="ride-contact-text" class="flex-center">
@@ -76,8 +77,13 @@
           Забронировать
         </div>
       </a>
+      {% else %}
+      <div class="ride-your">
+        Это Ваша поездка
+      </div>
+      {% endif %}
     </div>
   </div>
-  <script src="{% static 'main/scripts/ride.js' %}" rid="{{ ride.id }}"></script>
+  <script src="{% static 'main/scripts/ride.js' %}" rid="{{ ride.id }}" did="{{ ride.driver.id }}"></script>
 </section>
 {% endblock content %}

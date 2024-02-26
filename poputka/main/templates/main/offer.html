@@ -13,9 +13,57 @@
 {% endblock header %}
 
 {% block content %}
-<form action="{% url 'offer' %}" method="post">
-  {% csrf_token %}
-  {{ form }}
-  <button type="submit" class="container-hero-btn">Добавить</button>
-</form>
+<section class="section-ride">
+  <div class="container">
+    <div class="ride-wrapper mar-auto flex-column-center">
+      <h1>
+        Создание поездки
+      </h1>
+      <form class="flex-column-left offer-form" id="offer-form">
+        {% csrf_token %}
+        <div class="flex-center input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="10" viewBox="0 -960 960 960" width="24" fill="white"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Zm0-160q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Z"/></svg>
+          <input type="text" placeholder="Откуда" minlength="2" maxlength="30" required id="inp-from">
+        </div>
+        <div id="autocomplete-from"></div>
+        <div class="flex-center input-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="10" viewBox="0 -960 960 960" width="24" fill="white"><path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 31.5-155.5t86-127Q252-817 325-848.5T480-880q83 0 155.5 31.5t127 86q54.5 54.5 86 127T880-480q0 82-31.5 155t-86 127.5q-54.5 54.5-127 86T480-80Zm0-160q100 0 170-70t70-170q0-100-70-170t-170-70q-100 0-170 70t-70 170q0 100 70 170t170 70Z"/></svg>
+          <input type="text" placeholder="Куда" minlength="2" maxlength="30" required id="inp-to">
+        </div>
+        <div id="autocomplete-to"></div>
+        <div class="flex-center input-wrapper">
+          <div class="flex-center p-r-15px">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>
+            <input type="datetime-local" placeholder="Когда" required id="offer-datetime">
+          </div>
+          <div class="flex-center l-v-br">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>
+            <input type="number" placeholder="Мест" required id="offer-seats">
+          </div>
+          <div class="flex-center l-v-br">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg>
+            <input type="text" placeholder="Цена" required id="offer-price">
+            <span class="input-currency">₽</span>
+          </div>
+        </div>
+        <div class="input-wrapper">
+          <textarea name="offer-text" id="offer-text" placeholder="Информация для попутчиков"></textarea>
+        </div>
+        <script src="{% static 'main/scripts/createRide.js' %}"></script>
+        <button class="btn-bc-blue offer-btn flex-center jc-center" id="offer-btn" onclick="createRide(event)">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h360v80H200v560h560v-360h80v360q0 33-23.5 56.5T760-120H200Zm120-160v-80h320v80H320Zm0-120v-80h320v80H320Zm0-120v-80h320v80H320Zm360-80v-80h-80v-80h80v-80h80v80h80v80h-80v80h-80Z"/></svg>
+          Создать
+        </button>
+      </form>
+      <script src="{% static 'main/scripts/autocomplete.js' %}"></script>
+    </div>
+  </div>
+</section>
+
+<div class="a-opac hidden" id="overlay">
+  <div class="loader-container">
+    <div class="loader">
+    </div>
+  </div>
+</div>
 {% endblock content %}

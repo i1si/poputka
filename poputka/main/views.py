@@ -7,7 +7,7 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.response import Response
 
-from .forms import AddRide, SearchRide
+from .forms import SearchRide
 from .models import Ride, City, Feedback
 from users.models import User
 from .serializers import CitySerializer, RideSerializer, UserSerializer, FeedbackSerializer
@@ -26,15 +26,7 @@ def search(request):
 def offer(request):
     if not request.user.is_authenticated:
         return redirect('login')
-    if request.method == 'POST':
-        form = AddRide(request.POST)
-        if form.is_valid():
-            ride = Ride(**form.cleaned_data, driver_id=request.user.id)
-            ride.save()
-            return redirect('ride', ride_id=ride.id)
-    else:
-        form = AddRide()
-    return render(request, 'main/offer.html', {'form': form})
+    return render(request, 'main/offer.html')
 
 
 def show_ride(request, ride_id):

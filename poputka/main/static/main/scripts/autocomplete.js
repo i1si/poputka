@@ -29,14 +29,18 @@ inputTo.onkeyup = async function() {
 
 function displayFrom(result) {
     const content = result.map((list)=>{
-        return "<li onclick=selectInputFrom(this)>" + list['name'] + "</li>";
+        if (inputFrom.value != list['name']) {
+            return "<li onclick=selectInputFrom(this)>" + list['name'] + "</li>";
+        }
     })
     autocompleteFrom.innerHTML = '<ul class="autocomplete-list">' + content.join("") + "</ul>";
 }
 
 function displayTo(result) {
     const content = result.map((list)=>{
-        return "<li onclick=selectInputTo(this)>" + list['name'] + "</li>";
+        if (inputTo.value != list['name']){
+            return "<li onclick=selectInputTo(this)>" + list['name'] + "</li>";
+        }
     })
     autocompleteTo.innerHTML = '<ul class="autocomplete-list">' + content.join("") + "</ul>";
 }
