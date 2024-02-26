@@ -8,10 +8,14 @@ services:
     volumes:
       - ./poputka:/poputka
     environment:
-      - DB_HOST=pp_database
-      - DB_NAME=db
-      - DB_USER=djdjdj
-      - DB_PASSWORD=u0jg1STS0A
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASS=${EMAIL_HOST_PASS}
+      
 
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
@@ -23,9 +27,9 @@ services:
     volumes:
       - ~/.pg/pg_data/poputka_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=db
-      - POSTGRES_USER=djdjdj
-      - POSTGRES_PASSWORD=u0jg1STS0A
+      - POSTGRES_DB=${DB_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
 

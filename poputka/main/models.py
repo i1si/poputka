@@ -41,7 +41,7 @@ class Feedback(models.Model):
         (4, 'Хорошо'),
         (5, 'Отлично'),
     ]
-    author = models.ForeignKey(to=User, on_delete=models.SET('Удален'), verbose_name='Автор', related_name='author')
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Автор', related_name='author')
     rated_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Пользователь')
     text = models.CharField('Текст', max_length=300)
     rating = models.IntegerField('Оценка', choices=RATING_CHOICES)    # TODO выбор из нескольких оценок
