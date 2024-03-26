@@ -24,6 +24,7 @@ services:
 
   pp_database:
     image: postgres:16.1-alpine3.19
+    restart: always
     volumes:
       - ~/.pg/pg_data/poputka_data:/var/lib/postgresql/data
     environment:
