@@ -517,6 +517,10 @@ input {
     width: 160px;
 }
 
+.left-sidebar-ul li{
+    padding: 5px 0;
+}
+
 .left-sidebar-ul li a:hover {
     color: #939393;
 }
@@ -721,6 +725,9 @@ input {
     color: #87c5de;
 }
 
+#ride-book-btn-text {
+    color: white;
+}
 
 .ride-contact {
     margin-bottom: 10px;
@@ -739,6 +746,10 @@ input {
     background-color: #87c5de;
 }
 
+.btn-bc-gray {
+    background-color: #939393;
+}
+
 .btn-bc-blue:hover {
     transition-property: background-color;
     transition-duration: 200ms;
@@ -747,6 +758,8 @@ input {
 }
 
 .ride-book-btn {
+    cursor: pointer;
+    color: white;
     letter-spacing: 1px;
     display: block;
     padding: 10px;
@@ -897,4 +910,10 @@ input {
     40% {
         box-shadow: 0 2.5em 0 0
     }
+}
+
+.notification {
+    background-color: #ffe46c;
+    color: #000000;
+    text-align: center;
 }

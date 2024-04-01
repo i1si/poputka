@@ -2,21 +2,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
 from rest_framework import routers
-from .views import CityViewSet, index, search, offer, show_ride, RideViewSet, UserInfoView, FeedbackViewSet
+import main.views as v
 
 
 router = routers.DefaultRouter()
-router.register(r'rides', RideViewSet, basename='ride')
-router.register(r'cities', CityViewSet, basename='city')
-router.register(r'users', UserInfoView, basename='user')
-router.register(r'feedbacks', FeedbackViewSet, basename='feedback')
+router.register(r'rides', v.RideViewSet, basename='ride')
+router.register(r'cities', v.CityViewSet, basename='city')
+router.register(r'users', v.UserInfoView, basename='user')
+router.register(r'feedbacks', v.FeedbackViewSet, basename='feedback')
 
 urlpatterns = [
-    path('', index, name='main'),
-    path('search/', search, name='search'),
-    path('offer/', offer, name='offer'),
-    path('rides/<int:ride_id>/', show_ride, name='ride'),
+    path('', v.index, name='main'),
+    path('search/', v.search, name='search'),
+    path('offer/', v.offer, name='offer'),
+    path('rides/<int:ride_id>/', v.show_ride, name='ride'),
     path('api/v1/', include(router.urls)),
+    path('api/v1/book/', v.book_ride),
 ]
 
 if settings.DEBUG:

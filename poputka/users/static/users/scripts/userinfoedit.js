@@ -57,9 +57,7 @@ fetch(baseURL + '/api/v1/users/' + uid)
         document.getElementById('profile-age').value=data["birthday"]
         if (data["age"]) {
             document.getElementById('profile-age').innerHTML=getAgeTitle(data["age"]);
-        } else {
-            document.getElementById('profile-age').innerHTML='age - todo'
-        }
+        } 
 
         document.getElementById('profile-box').classList.remove("hidden");
     })

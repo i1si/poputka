@@ -10,6 +10,7 @@ class Ride(models.Model):
     price = models.PositiveIntegerField('Цена за место', null=True)
     text = models.CharField('Описание', null=True)
     driver = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Водитель')
+    companions = models.ManyToManyField(to=User, related_name='rides', blank=True)
 
     class Meta:
         verbose_name = 'Поездка'
@@ -17,7 +18,7 @@ class Ride(models.Model):
 
     def __str__(self):
         return f'{self.from_place} - {self.to_place}'
-    
+
 
 class City(models.Model):
     name = models.CharField('Название')

@@ -2,9 +2,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import F, Func
 from django.db.models.functions import ExtractYear
 from rest_framework import viewsets
-from rest_framework.mixins import RetrieveModelMixin,UpdateModelMixin, ListModelMixin, CreateModelMixin
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, ListModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.response import Response
 
 from .forms import SearchRide
@@ -31,7 +32,8 @@ def offer(request):
 
 def show_ride(request, ride_id):
     ride = get_object_or_404(Ride, id=ride_id)
-    return render(request, 'main/ride.html', {'ride': ride})
+    is_booked = ride.companions.filter(id=request.user.id).exists()
+    return render(request, 'main/ride.html', {'ride': ride, 'is_booked': is_booked})
 
 
 # API
@@ -81,6 +83,17 @@ class UserInfoView(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     serializer_class = UserSerializer
     lookup_field = 'id'
     permission_classes = (IsOwnerOrReadOnly, )
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def book_ride(request):
+    if 'rideID' in request.data:
+        companion = request.user
+        ride = get_object_or_404(Ride, id=request.data['rideID'])
+        ride.companions.set([companion])
+        return Response({'success': True})
+    return Response({'success': False, 'msg': 'rideID is required'})
 
 
 class FeedbackViewSet(ListModelMixin, GenericViewSet):

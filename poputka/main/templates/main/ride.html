@@ -63,6 +63,8 @@
       <div id="ride-text">
         <div class="skeleton skeleton-text-100-16"></div>
       </div>
+      {% csrf_token %}
+      <script src="{% static 'main/scripts/ride.js' %}" rid="{{ ride.id }}" did="{{ ride.driver.id }}" uid="{{ request.user.id }}"></script>
       {% if request.user.id != ride.driver.id %}
       <a href="" class="flex-center ride-contact">
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#87c5de"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
@@ -71,12 +73,28 @@
           <div class="skeleton skeleton-text-20-18"></div>
         </div>
       </a>
-      <a href="" class="ride-book-btn btn-bc-blue">
-        <div class="flex-center jc-center">
+      {% if request.user.is_authenticated %}
+      {% if is_booked %}
+      <div id="ride-book-btn-text" class="flex-center jc-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="m691-150 139-138-42-42-97 95-39-39-42 43 81 81ZM240-600h480v-80H240v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40ZM120-80v-680q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v267q-19-9-39-15t-41-9v-243H200v562h243q5 31 15.5 59T486-86l-6 6-60-60-60 60-60-60-60 60-60-60-60 60Zm120-200h203q3-21 9-41t15-39H240v80Zm0-160h284q38-37 88.5-58.5T720-520H240v80Zm-40 242v-562 562Z"/></svg>
+        Поездка забронирована
+      </div>
+      {% else %}
+      <div class="ride-book-btn btn-bc-blue" onclick="bookTrip()">
+        <div id="ride-book-btn-text" class="flex-center jc-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="m691-150 139-138-42-42-97 95-39-39-42 43 81 81ZM240-600h480v-80H240v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40ZM120-80v-680q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v267q-19-9-39-15t-41-9v-243H200v562h243q5 31 15.5 59T486-86l-6 6-60-60-60 60-60-60-60 60-60-60-60 60Zm120-200h203q3-21 9-41t15-39H240v80Zm0-160h284q38-37 88.5-58.5T720-520H240v80Zm-40 242v-562 562Z"/></svg>
           Забронировать
         </div>
       </a>
+      {% endif %}
+      {% else %}
+      <a href="{% url 'login' %}" class="ride-book-btn btn-bc-gray">
+        <div class="flex-center jc-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="mar-r-5px" height="24" viewBox="0 -960 960 960" width="24" fill="white"><path d="m691-150 139-138-42-42-97 95-39-39-42 43 81 81ZM240-600h480v-80H240v80ZM720-40q-83 0-141.5-58.5T520-240q0-83 58.5-141.5T720-440q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40ZM120-80v-680q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v267q-19-9-39-15t-41-9v-243H200v562h243q5 31 15.5 59T486-86l-6 6-60-60-60 60-60-60-60 60-60-60-60 60Zm120-200h203q3-21 9-41t15-39H240v80Zm0-160h284q38-37 88.5-58.5T720-520H240v80Zm-40 242v-562 562Z"/></svg>
+          Войдите чтобы забронировать
+        </div>
+      </a>
+      {% endif %}
       {% else %}
       <div class="ride-your">
         Это Ваша поездка
@@ -84,6 +102,5 @@
       {% endif %}
     </div>
   </div>
-  <script src="{% static 'main/scripts/ride.js' %}" rid="{{ ride.id }}" did="{{ ride.driver.id }}"></script>
 </section>
 {% endblock content %}
