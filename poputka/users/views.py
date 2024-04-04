@@ -87,5 +87,5 @@ def profile(request, user_id):
 
 def edit_profile(request, user_id): 
     if request.user.id != user_id:
-        raise Http404('The link seems to be broken')
+        raise Http404('The link seems to be broken :(')
     return render(request, 'users/edit_profile.html')

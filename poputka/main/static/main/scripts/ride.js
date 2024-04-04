@@ -31,7 +31,11 @@ fetch(baseURL + '/api/v1/rides/' + rid + '/')
 		document.getElementById('ride-dists-to').innerHTML=data['to_place'];
 		document.getElementById('ride-total').innerHTML=data['price'] + ' ₽';
 		document.getElementById('ride-driver-name').innerHTML=data['driver']['first_name'];
-		document.getElementById('ride-drier-rating').innerHTML=data['driver']['rating'] + '/5';
+		if (data['driver']['rating']) {
+			document.getElementById('ride-drier-rating').innerHTML=data['driver']['rating'] + '/5';
+		} else {
+			document.getElementById('ride-drier-rating').innerHTML='Нет оценок'
+		}
 		document.getElementById('ride-driver-image').src=data['driver']['avatar'];
 		document.getElementById('ride-text').innerHTML=data['text'];
 		if (uid != did) {

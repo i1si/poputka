@@ -7,7 +7,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'avatar',  'rating']
+        fields = ['id', 'first_name', 'avatar',  'rating']
 
 
 class RideSerializer(serializers.HyperlinkedModelSerializer):

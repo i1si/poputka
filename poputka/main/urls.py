@@ -16,6 +16,7 @@ urlpatterns = [
     path('search/', v.search, name='search'),
     path('offer/', v.offer, name='offer'),
     path('rides/<int:ride_id>/', v.show_ride, name='ride'),
+    path('myrides/', v.show_user_rides, name='user_rides'),
     path('api/v1/', include(router.urls)),
     path('api/v1/book/', v.book_ride),
 ]

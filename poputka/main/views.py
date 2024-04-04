@@ -1,18 +1,18 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.db.models import F, Func
+from django.db.models import F, Func, Q
 from django.db.models.functions import ExtractYear
 from rest_framework import viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, ListModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from .forms import SearchRide
 from .models import Ride, City, Feedback
 from users.models import User
 from .serializers import CitySerializer, RideSerializer, UserSerializer, FeedbackSerializer
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
 
 
 def index(request):
@@ -36,6 +36,10 @@ def show_ride(request, ride_id):
     return render(request, 'main/ride.html', {'ride': ride, 'is_booked': is_booked})
 
 
+def show_user_rides(request):
+    return render(request, 'main/userrides.html')
+
+
 # API
 class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericViewSet):
     """
@@ -47,7 +51,8 @@ class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericV
 
     def list(self, request, *args, **kwargs):
         """
-        Restricts the returned rides, by filtering against a `from`, `to`,  `date`, `persons` query parameters in the URL.
+        Restricts the returned rides, by filtering against a `from`, `to`,  `date`, `persons` and uid 
+        query parameters in the URL.
         """
         from_place = self.request.query_params.get('from', None)
         to_place = self.request.query_params.get('to', None)
@@ -56,6 +61,8 @@ class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericV
         if from_place and to_place and ride_date and person_count:
             queryset = Ride.objects.filter(from_place=from_place, to_place=to_place, ride_datetime__date=ride_date, 
                                         seats_count__gte=person_count).order_by('ride_datetime')
+        elif user_id := self.request.query_params.get('uid', None):
+            queryset = Ride.objects.filter(Q(companions=user_id) | Q(driver_id=user_id))
         else:
             queryset = None
         serializer = self.get_serializer(queryset, many=True)
@@ -67,7 +74,7 @@ class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericV
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CitySerializer
-    permission_classes = (IsAdminUser, )
+    permission_classes = (IsAdminOrReadOnly, )
 
     def get_queryset(self):
         user_query = self.request.query_params.get('q', None)
