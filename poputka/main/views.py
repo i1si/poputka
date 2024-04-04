@@ -43,10 +43,14 @@ def show_user_rides(request):
 # API
 class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericViewSet):
     """
-    API endpoint that allows ...
+    API endpoint that allows to create and receive trips.
+
+    * Only ride owner are able to access unsafe methods.
+    * Safe methods are available to all users.
     """
+    
     serializer_class = RideSerializer
-    permission_classes = (IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly)
+    permission_classes = (IsOwnerOrReadOnly, )
     queryset = Ride.objects.all()
 
     def list(self, request, *args, **kwargs):
@@ -54,6 +58,7 @@ class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericV
         Restricts the returned rides, by filtering against a `from`, `to`,  `date`, `persons` and uid 
         query parameters in the URL.
         """
+
         from_place = self.request.query_params.get('from', None)
         to_place = self.request.query_params.get('to', None)
         ride_date = self.request.query_params.get('date', None)
@@ -73,8 +78,11 @@ class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericV
 
 
 class CityViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows to get cities full name.
+    """
+
     serializer_class = CitySerializer
-    permission_classes = (IsAdminOrReadOnly, )
 
     def get_queryset(self):
         user_query = self.request.query_params.get('q', None)
@@ -84,6 +92,13 @@ class CityViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class UserInfoView(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
+    """
+    API endpoint that allows to recieve and update user data.
+
+    * Only owner are able to access unsafe methods.
+    * Safe methods are available to all users.
+    """
+
     queryset = User.objects.annotate(
         age=ExtractYear(Func(F('birthday'), function='age'))
     )
@@ -95,6 +110,12 @@ class UserInfoView(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def book_ride(request):
+    """
+    API endpoint that allows to book ride.
+
+    * Only authenticated users can access this endpoint.
+    """
+
     if 'rideID' in request.data:
         companion = request.user
         ride = get_object_or_404(Ride, id=request.data['rideID'])
@@ -104,6 +125,10 @@ def book_ride(request):
 
 
 class FeedbackViewSet(ListModelMixin, GenericViewSet):
+    """
+    API endpoint that allows to create and recieve user feedbacks.
+    """
+
     serializer_class = FeedbackSerializer
     # permission_classes = (IsOwnerOrReadOnly, )  # TODO если буду добавлять миксины
 
