@@ -259,6 +259,7 @@ input {
 
 .form {
     display: flex;
+    align-items: center;
 }
 
 .form-from {
@@ -267,8 +268,7 @@ input {
 }
 
 .form-persons {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    width: 40px;
 }
 
 .section-hero-heading {
@@ -947,4 +947,20 @@ input {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #939393;
+}
+
+.form-persons-pic {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 40px;
+    background-color: white;
+}
+
+.no-border {
+    border: 0;
+    outline: none;
+}
+
+.border-right {
+    border-right: 1px solid black;
 }
