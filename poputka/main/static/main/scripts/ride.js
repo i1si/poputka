@@ -31,6 +31,7 @@ fetch(baseURL + '/api/v1/rides/' + rid + '/')
 		document.getElementById('ride-dists-to').innerHTML=data['to_place'];
 		document.getElementById('ride-total').innerHTML=data['price'] + ' ₽';
 		document.getElementById('ride-driver-name').innerHTML=data['driver']['first_name'];
+		document.getElementById('ridecard-seats-total').innerHTML=data['seats_count'];
 		if (data['driver']['rating']) {
 			document.getElementById('ride-drier-rating').innerHTML=data['driver']['rating'] + '/5';
 		} else {

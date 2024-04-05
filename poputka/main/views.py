@@ -12,7 +12,7 @@ from .forms import SearchRide
 from .models import Ride, City, Feedback
 from users.models import User
 from .serializers import CitySerializer, RideSerializer, UserSerializer, FeedbackSerializer
-from .permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
+from .permissions import IsOwnerOrReadOnly
 
 
 def index(request):
@@ -48,7 +48,7 @@ class RideViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, GenericV
     * Only ride owner are able to access unsafe methods.
     * Safe methods are available to all users.
     """
-    
+
     serializer_class = RideSerializer
     permission_classes = (IsOwnerOrReadOnly, )
     queryset = Ride.objects.all()
@@ -120,6 +120,7 @@ def book_ride(request):
         companion = request.user
         ride = get_object_or_404(Ride, id=request.data['rideID'])
         ride.companions.set([companion])
+        ride.seats_count -= 1
         return Response({'success': True})
     return Response({'success': False, 'msg': 'rideID is required'})
 

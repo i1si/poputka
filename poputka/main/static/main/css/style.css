@@ -697,7 +697,6 @@ input {
 .ride-cost {
     padding: 10px 0;
     border-top: 1px solid #939393;
-    border-bottom: 1px solid #939393;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -942,4 +941,10 @@ input {
     transition-duration: 200ms;
     transition-timing-function: ease-in-out;
     background-color: #363636;
+}
+
+.ridecard-seats {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #939393;
 }
