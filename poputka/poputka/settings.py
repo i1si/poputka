@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('PP_DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,10 +69,10 @@ WSGI_APPLICATION = 'poputka.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD')
+        'HOST': os.environ.get('PP_DB_HOST'),
+        'NAME': os.environ.get('PP_DB_NAME'),
+        'USER': os.environ.get('PP_DB_USER'),
+        'PASSWORD': os.environ.get('PP_DB_PASSWORD')
         # 'PORT': getenv('PG_PORT'),
     }
 }
@@ -131,9 +131,9 @@ EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_USER = os.environ.get('PP_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('PP_EMAIL_HOST_PASS')
+DEFAULT_FROM_EMAIL = os.environ.get('PP_EMAIL_HOST_USER')
 
 # celery
 CELERY_BROKER_URL = 'redis://redis:6379/0'

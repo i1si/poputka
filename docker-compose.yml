@@ -8,13 +8,13 @@ services:
     volumes:
       - ./poputka:/poputka
     environment:
-      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${POSTGRES_DB}
-      - DB_USER=${POSTGRES_USER}
-      - DB_PASSWORD=${POSTGRES_PASSWORD}
-      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-      - EMAIL_HOST_PASS=${EMAIL_HOST_PASS}
+      - PP_DJANGO_SECRET_KEY=${PP_DJANGO_SECRET_KEY}
+      - PP_DB_HOST=${PP_DB_HOST}
+      - PP_DB_NAME=${PP_POSTGRES_DB}
+      - PP_DB_USER=${PP_POSTGRES_USER}
+      - PP_DB_PASSWORD=${PP_POSTGRES_PASSWORD}
+      - PP_EMAIL_HOST_USER=${PP_EMAIL_HOST_USER}
+      - PP_EMAIL_HOST_PASS=${PP_EMAIL_HOST_PASS}
       
 
     command: >
@@ -28,9 +28,9 @@ services:
     volumes:
       - ~/.pg/pg_data/poputka_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_HOST}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PP_POSTGRES_DB=${PP_DB_HOST}
+      - PP_POSTGRES_USER=${PP_POSTGRES_USER}
+      - PP_POSTGRES_PASSWORD=${PP_POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
 
